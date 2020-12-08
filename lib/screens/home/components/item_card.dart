@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/Product.dart';
-
-import '../../../constants.dart';
+import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Product_model.dart';
 
 class ItemCard extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
   final Function press;
   const ItemCard({
     Key key,
@@ -24,7 +23,7 @@ class ItemCard extends StatelessWidget {
               padding: EdgeInsets.all(kDefaultPaddin),
               decoration: BoxDecoration(
                 color: product.color,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Hero(
                 tag: "${product.id}",
@@ -40,7 +39,7 @@ class ItemCard extends StatelessWidget {
             ),
           ),
           Text(
-            "\ghc ${product.price}",
+            "\$${product.price}",
             style: TextStyle(fontWeight: FontWeight.bold),
           )
         ],

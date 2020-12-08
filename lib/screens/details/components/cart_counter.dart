@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 
-
 class CartCounter extends StatefulWidget {
   @override
   _CartCounterState createState() => _CartCounterState();

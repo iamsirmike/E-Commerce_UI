@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/Product.dart';
-
+import 'package:shop_app/models/Product_model.dart';
 
 class ProductTitleWithImage extends StatelessWidget {
+  final ProductModel product;
   const ProductTitleWithImage({
     Key key,
     @required this.product,
   }) : super(key: key);
-
-  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class ProductTitleWithImage extends StatelessWidget {
                   children: [
                     TextSpan(text: "Price\n"),
                     TextSpan(
-                      text: "\ghc ${product.price}",
+                      text: "\$${product.price}",
                       style: Theme.of(context).textTheme.headline4.copyWith(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),

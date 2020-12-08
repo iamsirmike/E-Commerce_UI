@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/models/Product_model.dart';
 
 import 'cart_counter.dart';
 
@@ -9,7 +9,7 @@ class CounterWithFavBtn extends StatefulWidget {
     @required this.product,
   });
 
-  final Product product;
+  final ProductModel product;
   @override
   _CounterWithFavBtnState createState() => _CounterWithFavBtnState();
 }

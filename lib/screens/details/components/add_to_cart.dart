@@ -1,31 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/Product.dart';
-
+import 'package:shop_app/models/Product_model.dart';
+import 'package:shop_app/provider/add_to_cart_provider.dart';
 
 class AddToCart extends StatefulWidget {
   const AddToCart({
     @required this.product,
+    this.numOfItems,
   });
 
-  final Product product;
+  final ProductModel product;
+  final int numOfItems;
 
   @override
   _AddToCartState createState() => _AddToCartState();
 }
 
 class _AddToCartState extends State<AddToCart> {
-  bool added = false;
   successSnackBar() {
     Get.snackbar(
-      added ? 'Ooops' : 'Nice',
-      added ? 'Item removed from cart' : 'Item added to cart',
+      widget.product.isselected ? 'Nice' : 'Ooops',
+      widget.product.isselected
+          ? 'Item added to cart'
+          : 'Item removed from cart',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: added ? Colors.red : widget.product.color,
+      backgroundColor:
+          widget.product.isselected ? widget.product.color : Colors.red,
       colorText: Colors.white,
     );
+  }
+
+  addToCart() {
+    setState(() {
+      widget.product.isselected = !widget.product.isselected;
+    });
+    Provider.of<CartItems>(context, listen: false).onItemAdded(
+      widget.product.image,
+      widget.product.title,
+      widget.product.price,
+      widget.product.color,
+      widget.numOfItems,
+    );
+    // Provider.of<CartItems>(context,listen:false).getTotal();
+    successSnackBar();
   }
 
   @override
@@ -39,7 +59,9 @@ class _AddToCartState extends State<AddToCart> {
             height: 50,
             width: 58,
             decoration: BoxDecoration(
-              color: added ? widget.product.color : Colors.white,
+              color: widget.product.isselected
+                  ? widget.product.color
+                  : Colors.white,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
                 color: widget.product.color,
@@ -48,13 +70,12 @@ class _AddToCartState extends State<AddToCart> {
             child: IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/add_to_cart.svg",
-                color: added ? Colors.white : widget.product.color,
+                color: widget.product.isselected
+                    ? Colors.white
+                    : widget.product.color,
               ),
               onPressed: () {
-                successSnackBar();
-                setState(() {
-                  added = !added;
-                });
+                addToCart();
               },
             ),
           ),

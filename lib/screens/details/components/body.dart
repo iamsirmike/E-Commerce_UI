@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/models/Product_model.dart';
 
 import 'add_to_cart.dart';
 import 'color_and_size.dart';
@@ -9,7 +9,7 @@ import 'description.dart';
 import 'product_title_with_image.dart';
 
 class Body extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
 
   const Body({Key key, this.product}) : super(key: key);
   @override
@@ -23,13 +23,12 @@ class Body extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: size.height * 0.27),
+                  margin: EdgeInsets.only(top: size.height * 0.37),
                   padding: EdgeInsets.only(
                     top: size.height * 0.12,
                     left: kDefaultPaddin,
                     right: kDefaultPaddin,
                   ),
-                  // height: 500,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -43,7 +42,8 @@ class Body extends StatelessWidget {
                       SizedBox(height: kDefaultPaddin / 2),
                       Description(product: product),
                       SizedBox(height: kDefaultPaddin / 2),
-                      CounterWithFavBtn(product: product,),
+                      CounterWithFavBtn(
+                          product: product),
                       SizedBox(height: kDefaultPaddin / 2),
                       AddToCart(product: product)
                     ],
